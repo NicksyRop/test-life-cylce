@@ -70,13 +70,25 @@ public class UserServiceImplTest {
     @Order(3)
     @DisplayName("Find user works")
     void testGetUserDetails_whenProvidedWithValidUserId_returnsUserDetails() {
+        //act
+        Map userDetails = userService.getUserDetails(createdUserId);
 
+        //Assert object not null
+        Assertions.assertNotNull(userDetails,"Find by User id should return user details");
+        //Assert that object is of correct id
+        Assertions.assertEquals(createdUserId, userDetails.get("userId"), "User id did not produce correct user id");
     }
 
     @Test
     @Order(4)
     @DisplayName("Delete user works")
     void testDeleteUser_whenProvidedWithValidUserId_returnsUserDetails() {
+
+        //act - return type is void
+        userService.deleteUser(createdUserId);
+
+        //assert that if we try fetching user of createdUserId , will be null
+        Assertions.assertNull(userService.getUserDetails(createdUserId), "User should not be found.");
 
     }
 
