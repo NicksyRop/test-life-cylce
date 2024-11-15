@@ -19,6 +19,7 @@ public class UserServiceImplTest {
    // private UserServiceImpl userService;
     UsersDatabase usersDatabase;
     UserService userService;
+    String createdUserId=""; //todo create this as a member variable so we can use it to store and retrieve stores ids
 
     @BeforeAll
     void setup() {
@@ -43,10 +44,8 @@ public class UserServiceImplTest {
         Map<String, String> user = new HashMap<>();
         user.put("firstName", "John");
         user.put("lastName", "Doe");
-
         //act  -  invoke method under test 
-        String createdUserId = userService.createUser(user);
-
+         createdUserId = userService.createUser(user);
         //assert
         Assertions.assertNotNull(createdUserId,"User id should not be null");
     }
@@ -56,7 +55,15 @@ public class UserServiceImplTest {
     @Order(2)
     @DisplayName("Update user works")
     void testUpdateUser_whenProvidedWithValidDetails_returnsUpdatedUserDetails() {
+        //arrange
+        Map<String, String> newUserDetails = new HashMap<>();
+        newUserDetails.put("firstName", "Nickson");
+        newUserDetails.put("lastName", "Doe");
 
+        //act
+        Map updatedUserDetails = userService.updateUser(createdUserId, newUserDetails);
+        //Assert to compare if the two maps are equak
+        Assertions.assertEquals(newUserDetails.get("firstName"), updatedUserDetails.get("firstName") ,"Update user did not produce correct map");
     }
 
     @Test
