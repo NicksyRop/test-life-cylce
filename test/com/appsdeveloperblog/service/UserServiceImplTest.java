@@ -14,6 +14,14 @@ public class UserServiceImplTest {
     /**
      * @BeforeAll and  @AfterAll do not need to be static  when we use TestInstance.Lifecycle.PER_CLASS
      * default method TestInstance.Lifecycle.PER_METHOD will require the methods static
+     *
+     *
+     * ----- all this method should run in order , hence a single instance of a test class is required otherwise it will fail
+     * "@TestInstance(TestInstance.Lifecycle.PER_CLASS)" configures JUnit 5 to create a single instance of the test class for all test methods.
+     * This allows you to share the setup and teardown process for multiple test methods within the same test class,
+     * which can be beneficial in situations where initializing or cleaning up resources is time-consuming or complex.
+     * By using a single instance for all test methods, you can maintain state and resources between test methods,
+     * making this approach more efficient in some cases.
      */
 
    // private UserServiceImpl userService;
